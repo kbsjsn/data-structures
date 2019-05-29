@@ -6,27 +6,37 @@ var Queue = function() {
 
   // Implement the methods below
 
+  var nextIndex = 0;
+
   someInstance.enqueue = function(value) {
     //adds data
-    var entriesArr = Object.entries(storage);
-    var index = entriesArr.length;
-    storage[index] = value;
+    storage[nextIndex] = value;
+    nextIndex++;
   };
 
   someInstance.dequeue = function() {
     //removes data
     //shift values down the keys (keys/indices stay same), delete last property
-    var entriesArr = Object.entries(storage);
-    var valToReturn = entriesArr[0][1];
-    var lastVal = entriesArr[entriesArr.length - 1][1];
-    for(var [key,value] of entriesArr) {
-      storage.key = 
+    var storageCopy = {};
+    for(var i in storage) {
+      storageCopy[i] = storage[i];
     }
+    var valToReturn = storage[0];
+    for(var i = 0; i < nextIndex - 1; i++) {
+      storage[i] = storageCopy[i + 1];
+    }
+    delete storage[nextIndex];
+    if(nextIndex === 0) {
+      nextIndex = 0;      
+    } else {
+      nextIndex--;
+    }
+    return valToReturn;
 
   };
 
   someInstance.size = function() {
-    return Object.entries(storage).length;
+    return nextIndex;
   };
 
   return someInstance;
