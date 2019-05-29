@@ -9,14 +9,7 @@ var Stack = function() {
 
   someInstance.push = function(value) {
     var entriesArr = Object.entries(storage); //[[key, value]]
-    var index = entriesArr.length;
-    /*
-    if(entriesArr.length === 0) {
-      index = 0;
-    } else {
-      index = entriesArr.length;  //last index
-    }
-    */
+    var index = entriesArr.length;  //index to which value will be set
     storage[index] = value;
   };
 
