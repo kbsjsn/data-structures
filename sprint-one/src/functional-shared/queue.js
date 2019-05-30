@@ -2,7 +2,7 @@ var Queue = function() {
   // Hey! Rewrite in the new style. Your code will wind up looking very similar,
   // but try not not reference your old code in writing the new style.
   var newQueue = {};
-  newQueue.storage = {};
+  // newQueue.storage = {};
   newQueue.nextIndex = 0;
 
   extend(newQueue, queueMethods);
@@ -19,21 +19,24 @@ var extend = function(to, from) {
 var queueMethods = {};
 
 queueMethods.enqueue = function(value) {
-	this.storage.nextIndex = value;
+	this[this.nextIndex] = value;
 	this.nextIndex += 1;
 };
 
-queueMethods.dequeue = function() {
+queueMethods.dequeue = function() {	
 	if(this.nextIndex === 0) {
 		this.nextIndex = 0;
+		return;
 	}
-	var firstIndex = this.storage[0];
-	var copyQueue = {};
-	extend(copyQueue, this.storage);
-	for(var i = 0; i < this.nextIndex - 1; i++) {
-		this.storage[i] = copyQueue[i + 1];
+	var firstIndex = this[0];
+	var copyQueue = {};	
+	extend(copyQueue, this);
+	this.nextIndex--;
+	for(var i = 0; i < this.nextIndex; i++) {
+		this[i] = copyQueue[i + 1];
 	}
-	delete this.storage[nextIndex - 1];
+	delete this[this.nextIndex];
+
 	return firstIndex;
 
 }
