@@ -15,7 +15,7 @@ Queue.prototype.dequeue = function() {
 	}
 	this.nextIndex--;
 	var toReturn = this[0];
-	//copy queue into copyQueue to use as template to modify orig queue
+	//copy orig queue into copyQueue to use as template to modify orig queue
 	var copyQueue = {};
 	for(var key in this) {
 		copyQueue[key] = this[key];
