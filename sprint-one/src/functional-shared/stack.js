@@ -23,22 +23,21 @@ stackMethods = {};
 stackMethods.push = function(value) {		
 	this.storage.nextIndex = value;
 	this.nextIndex += 1;
-}
+};
 
 stackMethods.pop = function() {	
 	if(this.nextIndex === 0) {
 		this.nextIndex = 0;
 		return this.storage.nextIndex;
 	}
-	this.nextIndex--;
+	this.nextIndex -= 1;
 	var toReturn = this.storage.nextIndex;
 	delete this.storage.nextIndex;
-	return toReturn;
-	
-}
+	return toReturn;	
+};
 
 stackMethods.size = function() {
 	return this.nextIndex;
-}
+};
 
 
