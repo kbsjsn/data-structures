@@ -25,10 +25,11 @@ var Queue = function() {
     for(var i = 0; i < nextIndex - 1; i++) {
       storage[i] = storageCopy[i + 1];
     }
-    delete storage[nextIndex];
+    
     if(nextIndex === 0) {
       nextIndex = 0;      
     } else {
+      delete storage[nextIndex];
       nextIndex--;
     }
     return valToReturn;
