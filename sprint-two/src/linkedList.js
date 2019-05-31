@@ -1,27 +1,41 @@
 var LinkedList = function() {
   var list = {};
-  list.head = Node();
-  list.tail = Node();
+  list.head = null;
+  list.tail = null;
 
   list.addToTail = function(value) {
-    if(Object.values(this).length === 0) {
-      this.head.value = value;
+    if(list.head === null) {
+      // list.head = Node(value); WRONG => creates 2 obj's
+      list.head = Node(value);
+      list.tail = list.head;
     } else {
-      this.tail.next = value; //pair old tail's next to incoming value
-      
-      this.value = Node(value);
+      var newTail = Node(value)
+      list.tail.next = newTail;            
+      //find tail and point its next to incoming value
+      list.tail = newTail;            
     }
   };
 
   list.removeHead = function() {
-    var newHead = this.head.next;
-    delete this.head;
-    this.head = newHead;
-    return newHead;
+    var newHead = list.head.next;
+    var oldHead = list.head;
+    list.head = newHead;
+    return oldHead.value;
   };
 
   list.contains = function(target) {
-    return this.value !== undefined || this.head.value !== undefined || this.tail.value !== undefined;
+    if(list.head.value === target) {
+      return true;
+    }
+    var currentNode = list.head.next;
+    while (currentNode) {   //same as currentNode !== node
+      if(currentNode.value === target) {
+        return true;
+        // break;
+      }
+      currentNode = currentNode.next;
+    }
+    return false;
 
   };
 
